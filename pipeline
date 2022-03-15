@@ -1,0 +1,40 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('limpar')
+        {
+            steps
+            {
+                cleanWs()
+            }
+        }
+        stage('git')
+        {
+            steps
+            {
+                git branch: 'main', url:'https://github.com/sergiocpxfontes/pythonweb3.git'
+            }
+        }
+        stage('docker')
+        {
+            steps
+            {
+                /*
+                dir('novadir')
+                {
+                    script
+                    {
+                        bat 'docker-compose up -d'
+                    }
+                }
+                */
+                script
+                {
+                    bat 'docker-compose up -d'
+                }
+            }
+        }
+    }
+}
